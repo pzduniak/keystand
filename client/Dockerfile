@@ -18,4 +18,4 @@ COPY --from=build /go/bin/keybase /usr/bin/keybase
 COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 
 ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
-CMD [ "service" ]
+CMD [ "keybase service" ]
