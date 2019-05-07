@@ -8,13 +8,16 @@ export HOME=/home/keybase
 mkdir -p /home/keybase
 chown -R keybase /home/keybase
 
-if [ -z "$KEYBASE_DEVICENAME" ]; then
-    export KEYBASE_DEVICENAME="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
-    echo "Device name not found, using $KEYBASE_DEVICENAME"
-fi
+# Check if the device is logged in and if it isn't, provision it
+if [ "$(keybase --standalone status --json | jq -r .LoggedIn)" -ne "true" ]; then
+    if [ -z "$KEYBASE_DEVICENAME" ]; then
+        export KEYBASE_DEVICENAME="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
+        echo "Device name not found, using $KEYBASE_DEVICENAME"
+    fi
 
-# Run keybase login, expecting autoprovisioning 
-sudo -E -u keybase keybase --standalone --debug login -paperkey "$KEYBASE_PAPERKEY" -devicename "$KEYBASE_DEVIECNAME" $KEYBASE_USERNAME
+    # Run keybase login, expecting autoprovisioning 
+    sudo -E -u keybase keybase --standalone --debug login -paperkey "$KEYBASE_PAPERKEY" -devicename "$KEYBASE_DEVIECNAME" $KEYBASE_USERNAME
+fi
 
 # Then switch to service
 exec sudo -E -u keybase $@

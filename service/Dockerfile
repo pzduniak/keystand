@@ -10,7 +10,7 @@ FROM ubuntu:18.04
 
 RUN useradd -ms /bin/bash keybase
 RUN apt-get update && \
-	apt-get install -y sudo && \
+	apt-get install -y sudo jq && \
 	rm -rf /var/lib/apt/lists/*
 VOLUME [ "/home/keybase/.config/keybase", "/home/keybase/.local/share/keybase" ]
 

@@ -9,7 +9,6 @@ docker run \
     -e KEYBASE_USERNAME="yourusername" \
     -e KEYBASE_PAPERKEY="your paper key ..." \
     -e KEYBASE_DEVICENAME="desired device name" \ # optional
-    --rm \ # logging into a provisioned device is not supported
     --name keybase \ # required to use volumes-from later
     pzduniak/keystand:service \
     keybase --debug service # cmd is optional, debug mode is quite useful for debugging
