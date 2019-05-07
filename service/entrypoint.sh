@@ -9,7 +9,7 @@ mkdir -p /home/keybase
 chown -R keybase /home/keybase
 
 # Check if the device is logged in and if it isn't, provision it
-if [ "$(keybase --standalone status --json | jq -r .LoggedIn)" -ne "true" ]; then
+if [ "$(sudo -E -u keybase keybase --standalone status --json | jq -r .LoggedIn)" -ne "true" ]; then
     if [ -z "$KEYBASE_DEVICENAME" ]; then
         export KEYBASE_DEVICENAME="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
         echo "Device name not found, using $KEYBASE_DEVICENAME"
