@@ -1,5 +1,7 @@
 # keystand
 
+**DEPRECATED: Use https://hub.docker.com/r/keybaseio/client instead.**
+
 A Keybase service that provisions using a paper key.
 
 ## Starting the service
